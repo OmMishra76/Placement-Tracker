@@ -1,0 +1,8 @@
+from app import app
+from models import db
+from models.user import User
+from models.application import Application
+
+with app.app_context():
+    db.create_all()
+    print("Tables created successfully!")

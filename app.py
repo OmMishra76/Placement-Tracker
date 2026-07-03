@@ -1,13 +1,15 @@
-from flask import Flask , render_template
+from flask import Flask, render_template
+from config import Config
+from models import db
 
-# Create an instance of the Flask application
 app = Flask(__name__)
+app.config.from_object(Config)
 
-# Define the route for the home page
+db.init_app(app)
+
 @app.route("/")
 def home():
     return render_template("home.html")
 
-# Run the application
 if __name__ == "__main__":
     app.run(debug=True)
