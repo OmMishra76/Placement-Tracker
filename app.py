@@ -5,6 +5,7 @@ from models.user import User
 from flask_login import LoginManager
 from routes.auth import auth
 from models.application import Application
+from routes.applications import applications
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -12,7 +13,7 @@ app.config.from_object(Config)
 db.init_app(app)
 
 login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager.init_app(app) 
 login_manager.login_view = 'auth.login'
 
 @login_manager.user_loader
@@ -20,6 +21,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 app.register_blueprint(auth)
+app.register_blueprint(applications)
 
 @app.route("/")
 def home():
